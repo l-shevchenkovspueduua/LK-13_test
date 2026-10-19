@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практична майстерня — Тема 13 (За презентацією ЛК_13)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #F9F9F6;
+            --bg-card: #EEF6F3;
+            --text-main: #1E252B;
+            --accent-sage: #2D5A4C;
+            --accent-amber: #E86C2C;
+            --border-color: #D8E8E2;
+            --white: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 840px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(45, 90, 76, 0.08);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        header {
+            background-color: var(--accent-sage);
+            color: var(--white);
+            padding: 28px 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 15px;
+            opacity: 0.92;
+        }
+
+        .progress-bar-container {
+            background: #e2ede8;
+            height: 6px;
+            width: 100%;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--accent-amber);
+            width: 20%;
+            transition: width 0.3s ease;
+        }
+
+        .step-content {
+            padding: 30px;
+        }
+
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            color: var(--accent-sage);
+            margin-bottom: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        input[type="text"], input[type="email"], select, textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-main);
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-sage);
+            background: var(--white);
+        }
+
+        .level-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .level-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 14px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .level-card:hover {
+            border-color: var(--accent-sage);
+        }
+
+        .level-card.selected {
+            background: var(--accent-sage);
+            color: var(--white);
+            border-color: var(--accent-sage);
+        }
+
+        .quiz-question {
+            background: var(--bg-card);
+            padding: 18px;
+            border-radius: 10px;
+            margin-bottom: 18px;
+            border: 1px solid var(--border-color);
+        }
+
+        .quiz-question p {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .quiz-options label {
+            display: block;
+            background: var(--white);
+            padding: 10px 14px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            font-weight: 400;
+            transition: border-color 0.2s;
+        }
+
+        .quiz-options label:hover {
+            border-color: var(--accent-sage);
+        }
+
+        .quiz-options input[type="radio"] {
+            margin-right: 8px;
+            accent-color: var(--accent-sage);
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        button {
+            background: var(--accent-sage);
+            color: var(--white);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        button.secondary {
+            background: #e2ede8;
+            color: var(--text-main);
+        }
+
+        .verb-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+        }
+
+        .verb-pill {
+            background: var(--bg-card);
+            border: 1px solid var(--accent-sage);
+            color: var(--accent-sage);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .verb-pill:hover {
+            background: var(--accent-sage);
+            color: var(--white);
+        }
+
+        .prompt-output {
+            background: #1E252B;
+            color: #E2F0EC;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 13px;
+            white-space: pre-wrap;
+            margin-top: 15px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: normal;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-label input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent-sage);
+        }
+
+        .score-badge {
+            background: var(--accent-sage);
+            color: var(--white);
+            padding: 18px 20px;
+            border-radius: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 19px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+            border: 2px solid var(--accent-amber);
+        }
+
+        .summary-card {
+            background: var(--bg-card);
+            padding: 24px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            border: 2px solid var(--accent-sage);
+        }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; border: none; }
+            .btn-container, .progress-bar-container, .no-print { display: none !important; }
+            .step { display: none !important; }
+            #step5 { display: block !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Практична майстерня — Тема 13</h1>
+        <p>Педагогічне проєктування в епоху ШІ — від електронної шпаргалки до спаринг-партнера</p>
+    </header>
+    <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="step-content">
+        <!-- ЕТАП 1 -->
+        <div class="step active" id="step1">
+            <h2>Крок 1. Дані учасника та вибір рівня освіти</h2>
+            <div class="form-group">
+                <label>Прізвище, ім'я, по батькові</label>
+                <input type="text" id="userName" placeholder="Введіть ваше повне ПІБ" required>
+            </div>
+            <div class="form-group">
+                <label>Заклад освіти</label>
+                <input type="text" id="userSchool" placeholder="Вкажіть назву вашого закладу освіти" required>
+            </div>
+            <div class="form-group">
+                <label>Предмет або освітня галузь / дисципліна</label>
+                <input type="text" id="userSubject" placeholder="Яку дисципліну чи предмет ви викладаєте" required>
+            </div>
+            <div class="form-group">
+                <label>Електронна пошта</label>
+                <input type="email" id="userEmail" placeholder="name@example.com" required>
+            </div>
+            <div class="form-group">
+                <label>Оберіть ваш рівень освіти</label>
+                <div class="level-grid" id="levelGrid">
+                    <div class="level-card" data-level="Початкова школа (1–4 класи)">Початкова школа (1–4 класи)</div>
+                    <div class="level-card" data-level="Середня школа (5–9 класи)">Середня школа (5–9 класи)</div>
+                    <div class="level-card" data-level="Старша профільна школа (10–12 класи)">Старша профільна школа (10–12 класи)</div>
+                    <div class="level-card" data-level="ЗП(ПТ)О (Професійна освіта)">ЗП(ПТ)О (Професійна освіта)</div>
+                    <div class="level-card" data-level="ЗФПО (Фахова передвища освіта)">ЗФПО (Фахова передвища освіта)</div>
+                    <div class="level-card" data-level="ЗВО (Вища освіта)">ЗВО (Вища освіта)</div>
+                </div>
+            </div>
+            <div class="btn-container">
+                <div></div>
+                <button onclick="nextStep(2)">Перейти до тесту за презентацією (10 питань)</button>
+            </div>
+        </div>
+
+        <!-- ЕТАП 2: 10 ТЕСТОВИХ ПИТАНЬ ЗА СЛАЙДАМИ ПРЕЗЕНТАЦІЇ ЛК_13 -->
+        <div class="step" id="step2">
+            <h2>Крок 2. Тестова перевірка за слайдами презентації (10 питань)</h2>
+            <div id="quizContainer">
+                
+                <div class="quiz-question">
+                    <p>1. Що є головною загрозою використання звичайного неналаштованого чат-бота згідно з експериментом PNAS 2024 року на 1000 учнів (слайди 2–3)?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q1" value="0"> А) Технічні збої під час підключення до мережі Інтернет</label>
+                        <label><input type="radio" name="q1" value="1"> Б) Когнітивна лінь та ілюзія знань — мозок звикає «спати» при отриманні готових відповідей, і бали на тестах нижчі, ніж у тих, хто не мав ШІ</label>
+                        <label><input type="radio" name="q1" value="0"> В) Надмірна кількість зустрічних запитань від чат-бота</label>
+                        <label><input type="radio" name="q1" value="0"> Г) Відмова штучного інтелекту вирішувати типові шкільні завдання</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p>2. У чому полягає сутність «Закону Бйорка» та концепції продуктивних труднощів (Desirable Difficulties) (слайд 4)?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q2" value="0"> А) ШІ має повністю формулювати аргументи та висновки замість учня</label>
+                        <label><input type="radio" name="q2" value="0"> Б) Будь-яке делегування рутинних операцій машині призводить до деградації</label>
+                        <label><input type="radio" name="q2" value="1"> В) Навчання відбувається лише тоді, коли мозок долає зусилля — віддаємо машині механічну рутину, але зберігаємо інтелектуальний виклик</label>
+                        <label><input type="radio" name="q2" value="0"> Г) Учень повинен вручну переписувати згенеровані тексти в зошит</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p>3. Яку з 7 педагогічних масок ШІ обрати, щоб подолати «страх чистого аркуша» під час мозкового штурму, коли бот підкидає 5 шалених ідей, а група сама допрацьовує одну (слайди 5–8)?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q3" value="0"> А) ШІ-опонент (Challenger)</label>
+                        <label><input type="radio" name="q3" value="0"> Б) ШІ-новачок (Метод Фейнмана)</label>
+                        <label><input type="radio" name="q3" value="1"> В) ШІ-напарник по команді</label>
+                        <label><input type="radio" name="q3" value="0"> Г) ШІ-коуч для довгих проєктів</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p>4. Як працює роль «ШІ-новачок» за методом Фейнмана у навчальному процесі (слайд 7)?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q4" value="0"> А) Бот перевіряє знання за складними науковими термінами з університетського курсу</label>
+                        <label><input type="radio" name="q4" value="1"> Б) Учень пояснює тему простими словами (як шестикласнику), а бот перебиває, коли щось незрозуміло</label>
+                        <label><input type="radio" name="q4" value="0"> В) Бот імітує вередливого клієнта на СТО або купця із середньовічного Львова</label>
+                        <label><input type="radio" name="q4" value="0"> Г) ШІ розбиває написання роботи МАН на тижневі кроки</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p>5. Яка формула лежить в основі «Анатомії живого компетентнісного завдання» за принципом Руслана Шаламова (слайди 9–11)?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q5" value="0"> А) Запитання «Хто написав?» + «У якому році?» + «Що таке оперативна пам'ять?»</label>
+                        <label><input type="radio" name="q5" value="1"> Б) [Контекст / Стимул] (життєва ситуація, дані) + [Проблема] (суперечність) + [Дія] (прийняти рішення, знайти помилку, порадити)</label>
+                        <label><input type="radio" name="q5" value="0"> В) Читання параграфа підручника + переказ + закритий тест</label>
+                        <label><input type="radio" name="q5" value="0"> Г) Прямий запит у чат-бот + копіювання відповіді у звіт</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p>6. У якій послідовності відбувається зворотне проєктування завдань за 3 хвилини (слайд 13)?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q6" value="0"> А) Крок 1 Теорія — Крок 2 Конспект — Крок 3 Переказ</label>
+                        <label><input type="radio" name="q6" value="1"> Б) Крок 1 Результат (яку дію учень зробить власним розумом) — Крок 2 Завдання (життєвий кейс) — Крок 3 Теорія (мінімальна база)</label>
+                        <label><input type="radio" name="q6" value="0"> В) Крок 1 Генерація тесту — Крок 2 Вибір теми — Крок 3 Лекція</label>
+                        <label><input type="radio" name="q6" value="0"> Г) Крок 1 Домашня вправа — Крок 2 Оцінка — Крок 3 Розбір помилок</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p>7. Де на піраміді таксономії Блума проходить «Межа самостійного мислення» (слайди 14–16)?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q7" value="0"> А) Між рівнем 1 (Пам'ять) і рівнем 2 (Розуміння)</label>
+                        <label><input type="radio" name="q7" value="1"> Б) Між рівнем 3 (Застосування за шаблоном) і рівнем 4 (Аналіз, Оцінювання, Творення) — все, що нижче, ШІ миттєво розв'язує замість учня</label>
+                        <label><input type="radio" name="q7" value="0"> В) Вище рівня 6 (Творення авторського проєкту)</label>
+                        <label><input type="radio" name="q7" value="0"> Г) На рівні відтворення базових термінів і дат</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p>8. У чому полягає обов'язок «Фактчекера-детектива» та «Спікера-захисника» у мікрогрупі (1 смартфон на 4 учнів) (слайди 18–19)?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q8" value="0"> А) Фактчекер друкує запит у телефоні, а Спікер зачитує текст з екрана</label>
+                        <label><input type="radio" name="q8" value="1"> Б) Фактчекер офлайн звіряє відповідь ШІ з підручником чи атласом, а Спікер захищає розв'язок перед класом без смартфона</label>
+                        <label><input type="radio" name="q8" value="0"> В) Обидва учні шукають інформацію в різних чат-ботах одночасно</label>
+                        <label><input type="radio" name="q8" value="0"> Г) Вони стежать лише за дотриманням тиші в кабінеті</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p>9. Як працює ритуал «Екрани на стіл» та «Фасилітація сумніву» під час 15-хвилинного спринту (слайди 20–22)?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q9" value="0"> А) Учні користуються смартфонами без обмежень часу протягом усього уроку</label>
+                        <label><input type="radio" name="q9" value="1"> Б) Після цифрової фази телефони кладуться дисплеєм донизу, а вчитель ставить три питання («Яке слово чуєш уперше?», «Де бот спростив правду?», «Як відповісти опоненту?»)</label>
+                        <label><input type="radio" name="q9" value="0"> В) Учитель збирає телефони на початку уроку і сам зачитує відповіді бота</label>
+                        <label><input type="radio" name="q9" value="0"> Г) Учні пересилають скріншоти відповідей у шкільний чат без обговорення</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p>10. Що включає принцип інклюзії Юсі Кайнулайнена та фінальний аудит учителя Human-in-the-Loop (слайди 23–24)?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q10" value="0"> А) Зміну освітньої мети для кожного учня та повну довіру до цифр від ШІ</label>
+                        <label><input type="radio" name="q10" value="1"> Б) Збереження спільної освітньої мети при диференціації формату (зокрема Easy-to-Read) та перевірку тексту за 3 фільтрами — Стоп «Галюцинації», Стоп «Вода», Стоп «Чужий контекст»</label>
+                        <label><input type="radio" name="q10" value="0"> В) Використання американських реалій та наукоподібного глянцю без прикладів</label>
+                        <label><input type="radio" name="q10" value="0"> Г) Відмову від візуальної інфографіки та спрощених текстів на уроці</label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="btn-container">
+                <button class="secondary" onclick="prevStep(1)">Назад</button>
+                <button onclick="validateQuizAndNext()">Перейти до конструктора завдань</button>
+            </div>
+        </div>
+
+        <!-- ЕТАП 3 -->
+        <div class="step" id="step3">
+            <h2>Крок 3. Конструктор живого компетентнісного завдання</h2>
+            <p style="font-size: 14px; margin-bottom: 15px; color: #555;">Спроєктуйте завдання для вашого рівня освіти (<span id="displayLevel" style="font-weight: 600; color: var(--accent-sage);">не обрано</span>).</p>
+            
+            <div class="form-group">
+                <label>Тема вашого заняття</label>
+                <input type="text" id="taskTheme" placeholder="Наприклад — Теплопровідність / Люблінська унія / Алгоритми">
+            </div>
+            <div class="form-group">
+                <label>Було (Пам'ять — старе репродуктивне запитання)</label>
+                <input type="text" id="taskOld" placeholder="Наприклад — Сформулюйте закон заломлення світла">
+            </div>
+            <div class="form-group">
+                <label>Оберіть цільовий рівень мислення за Блумом (вище межі списування)</label>
+                <select id="taskBloom" onchange="updateVerbs()">
+                    <option value="Рівень 4 — Аналіз (зіставлення суперечливих даних і пошук прихованого мотиву)">Рівень 4. Аналіз</option>
+                    <option value="Рівень 5 — Оцінювання (пошук логічних пасток і маніпуляцій у відповіді ШІ)">Рівень 5. Оцінювання</option>
+                    <option value="Рівень 6 — Творення (розробка авторського плану в умовах дефіциту ресурсів)">Рівень 6. Творення</option>
+                </select>
+                <div class="verb-pills" id="verbPills"></div>
+            </div>
+            <div class="form-group">
+                <label>1. [ Контекст ] — Життєва ситуація, люди, графік або показання приладів</label>
+                <textarea id="taskContext" rows="2" placeholder="Опишіть реальні побутові чи фахові умови..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>2. [ Проблема ] — Суперечність, де треба розібратися</label>
+                <textarea id="taskProblem" rows="2" placeholder="У чому полягає колізія або пастка..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>3. [ Дія ] — Конкретний крок здобувача освіти</label>
+                <textarea id="taskAction" rows="2" placeholder="Прийняти рішення, знайти помилку, порадити фахівцю..."></textarea>
+            </div>
+
+            <button type="button" onclick="generatePrompt()" style="background: var(--accent-amber); margin-bottom: 15px;">Згенерувати запит до ШІ (Зворотне проєктування)</button>
+            <div class="prompt-output" id="promptOutput" style="display: none;"></div>
+
+            <div class="btn-container">
+                <button class="secondary" onclick="prevStep(2)">Назад</button>
+                <button onclick="nextStep(4)">Далі до фасилітації класу</button>
+            </div>
+        </div>
+
+        <!-- ЕТАП 4 -->
+        <div class="step" id="step4">
+            <h2>Крок 4. Педагогічна маска ШІ та фасилітація класу</h2>
+            
+            <div class="form-group">
+                <label>Оберіть педагогічну маску ШІ (із 7 ролей за презентацією)</label>
+                <select id="aiRole">
+                    <option value="1. Сократівський тьютор (веде покроково, одна підказка за раз)">1. Сократівський тьютор</option>
+                    <option value="2. ШІ-опонент у дебатах (Challenger — шукає 3 слабкі місця)">2. ШІ-опонент у дебатах (Challenger)</option>
+                    <option value="3. ШІ-новачок за методом Фейнмана (просить пояснити простими словами)">3. ШІ-новачок (Метод Фейнмана)</option>
+                    <option value="4. ШІ-симулятор (життєвий тренажер — клієнт СТО, пацієнт, купець)">4. ШІ-симулятор ситуації</option>
+                    <option value="5. ШІ-напарник по команді (5 шалених ідей для мозкового штурму)">5. ШІ-напарник по команді</option>
+                    <option value="6. ШІ-коуч для довгих проєктів (розбиває МАН чи курсову на тижневі кроки)">6. ШІ-коуч для довгих проєктів</option>
+                    <option value="7. ШІ-асистент учителя (генерація чернеток кейсів та адаптація Easy-to-Read)">7. ШІ-асистент учителя</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Оберіть архітектуру цифрового уроку (модель взаємодії)</label>
+                <select id="facModel">
+                    <option value="Мікрогрупи (1 смартфон на 4 учнів — Промптер, Фактчекер, Спікер)">Мікрогрупи (1 смартфон на 4 учнів)</option>
+                    <option value="Дуель «Людина проти Бота» (порівняння власного рішення з машинним)">Дуель «Людина проти Бота»</option>
+                    <option value="Сократівський спаринг (індивідуальна робота 1-на-1 із ШІ-тьютором)">Сократівський спаринг (1-на-1)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Опишіть застосування ритуалу «Екрани на стіл» та «Трьох питань слідчого» на вашому занятті</label>
+                <textarea id="taskProcess" rows="3" placeholder="Як ви перевірите глибину захисту позиції після завершення цифрової фази..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Фінальний аудит учителя (Human-in-the-Loop)</label>
+                <label class="checkbox-label"><input type="checkbox" id="check1" required> Стоп «Галюцинації» — цифри, дати й факти звірено за першоджерелом</label>
+                <label class="checkbox-label"><input type="checkbox" id="check2" required> Стоп «Вода» — прибрано науковий глянець без життєвого сенсу</label>
+                <label class="checkbox-label"><input type="checkbox" id="check3" required> Стоп «Чужий контекст» — завдання приземлено на український держстандарт</label>
+            </div>
+
+            <div class="btn-container">
+                <button class="secondary" onclick="prevStep(3)">Назад</button>
+                <button onclick="prepareSummary()">Сформувати підсумковий екран для скріншоту</button>
+            </div>
+        </div>
+
+        <!-- ЕТАП 5 -->
+        <div class="step" id="step5">
+            <h2>Крок 5. Підсумковий сертифікат-паспорт роботи (Тема 13)</h2>
+            <div class="score-badge" id="scoreBadge">Результат тесту за презентацією ЛК 13 — 0 з 10 балів</div>
+            <div class="summary-card" id="summaryCard"></div>
+
+            <div class="no-print" style="background: var(--bg-card); padding: 16px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid var(--accent-amber);">
+                <p style="font-size: 15px; font-weight: 600; margin-bottom: 6px;">Як здати роботу в Google Клас</p>
+                <p style="font-size: 14px;">Зробіть <strong>скріншот цього екрана</strong> або натисніть кнопку <strong>«Зберегти звіт у PDF»</strong> та прикріпіть файл до завдання у вашому Google Класі.</p>
+                <div id="sendStatus" style="font-size: 13px; color: var(--accent-sage); font-weight: 600; margin-top: 6px;"></div>
+            </div>
+
+            <div class="no-print" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                <button onclick="window.print()" style="background: var(--accent-amber);">Друк / Зберегти звіт у PDF</button>
+                <button onclick="sendViaFormSubmit()">Надіслати копію на пошту викладача</button>
+                <button class="secondary" onclick="copyToClipboard()">Скопіювати текст звіту</button>
+            </div>
+
+            <div class="btn-container no-print" style="margin-top: 20px;">
+                <button class="secondary" onclick="prevStep(4)">Повернутися до редагування</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentStep = 1;
+    let selectedLevel = "";
+
+    document.querySelectorAll('.level-card').forEach(card => {
+        card.addEventListener('click', function() {
+            document.querySelectorAll('.level-card').forEach(c => c.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedLevel = this.getAttribute('data-level');
+            document.getElementById('displayLevel').innerText = selectedLevel;
+        });
+    });
+
+    function updateVerbs() {
+        const bloom = document.getElementById('taskBloom').value;
+        const pillsDiv = document.getElementById('verbPills');
+        pillsDiv.innerHTML = "";
+        let verbs = [];
+        if(bloom.includes("Аналіз")) {
+            verbs = ["Зістав", "Порівняй", "Знайди причину збою", "Вияви прихований мотив"];
+        } else if(bloom.includes("Оцінювання")) {
+            verbs = ["Оціни надійність", "Вияви помилку", "Розсуди", "Доведи хибність судження"];
+        } else {
+            verbs = ["Спроєктуй", "Розроби план", "Запропонуй гіпотезу", "Створи в умовах обмежень"];
+        }
+        verbs.forEach(v => {
+            let pill = document.createElement('div');
+            pill.className = 'verb-pill';
+            pill.innerText = "+ " + v;
+            pill.onclick = () => {
+                let act = document.getElementById('taskAction');
+                act.value += (act.value ? ", " : "") + v.toLowerCase();
+            };
+            pillsDiv.appendChild(pill);
+        });
+    }
+    updateVerbs();
+
+    function nextStep(step) {
+        if(step === 2) {
+            let name = document.getElementById('userName').value.trim();
+            let email = document.getElementById('userEmail').value.trim();
+            if(!name || !email || !selectedLevel) {
+                alert("Будь ласка, заповніть ПІБ, електронну пошту та оберіть ваш рівень освіти!");
+                return;
+            }
+        }
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        document.getElementById('step' + step).classList.add('active');
+        currentStep = step;
+        document.getElementById('progressBar').style.width = (step * 20) + "%";
+        window.scrollTo(0,0);
+    }
+
+    function validateQuizAndNext() {
+        for(let i=1; i<=10; i++) {
+            let checked = document.querySelector(`input[name="q${i}"]:checked`);
+            if(!checked) {
+                alert(`Будь ласка, дайте відповідь на тестове запитання №${i}!`);
+                return;
+            }
+        }
+        nextStep(3);
+    }
+
+    function prevStep(step) {
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        document.getElementById('step' + step).classList.add('active');
+        currentStep = step;
+        document.getElementById('progressBar').style.width = (step * 20) + "%";
+        window.scrollTo(0,0);
+    }
+
+    function calculateQuizScore() {
+        let score = 0;
+        for(let i=1; i<=10; i++) {
+            let checked = document.querySelector(`input[name="q${i}"]:checked`);
+            if(checked && checked.value === "1") {
+                score++;
+            }
+        }
+        return score;
+    }
+
+    function generatePrompt() {
+        let theme = document.getElementById('taskTheme').value || "[Тема]";
+        let oldQ = document.getElementById('taskOld').value || "[Старе питання]";
+        let bloom = document.getElementById('taskBloom').value;
+        let ctx = document.getElementById('taskContext').value || "[Побутова чи фахова ситуація]";
+        let prob = document.getElementById('taskProblem').value || "[Суперечність]";
+        let act = document.getElementById('taskAction').value || "[Крок здобувача освіти]";
+
+        let prompt = `Дій як досвідчений учитель. Тема — «${theme}» (рівень — ${selectedLevel}).\n` +
+                     `Замість репродуктивного питання «${oldQ}» склади життєве компетентнісне завдання без прямого згадування формул на рівень «${bloom}».\n` +
+                     `1. [Контекст] — ${ctx}\n` +
+                     `2. [Проблема] — ${prob}\n` +
+                     `3. [Дія] — ${act}\n` +
+                     `Додай 2 суперечливі варіанти і попроси здобувача освіти обґрунтувати вибір.`;
+        
+        let out = document.getElementById('promptOutput');
+        out.style.display = "block";
+        out.innerText = prompt;
+    }
+
+    function getSummaryText() {
+        let name = document.getElementById('userName').value;
+        let school = document.getElementById('userSchool').value;
+        let subj = document.getElementById('userSubject').value;
+        let email = document.getElementById('userEmail').value;
+        let score = calculateQuizScore();
+
+        let theme = document.getElementById('taskTheme').value || "Не вказано";
+        let oldQ = document.getElementById('taskOld').value || "Не вказано";
+        let bloom = document.getElementById('taskBloom').value;
+        let ctx = document.getElementById('taskContext').value || "Не вказано";
+        let prob = document.getElementById('taskProblem').value || "Не вказано";
+        let act = document.getElementById('taskAction').value || "Не вказано";
+        let role = document.getElementById('aiRole').value;
+        let model = document.getElementById('facModel').value;
+        let process = document.getElementById('taskProcess').value || "Не вказано";
+
+        return `ПАСПОРТ ПРАКТИЧНОЇ РОБОТИ — ТЕМА 13\n` +
+               `=========================================\n` +
+               `ПІБ учасника — ${name}\n` +
+               `Заклад освіти — ${school}\n` +
+               `Предмет / Дисципліна — ${subj}\n` +
+               `Рівень освіти — ${selectedLevel}\n` +
+               `Електронна пошта — ${email}\n` +
+               `ТЕСТ ЗА ПРЕЗЕНТАЦІЄЮ ЛК 13 — ${score} з 10 балів\n\n` +
+               `1. АНАТОМІЯ КОМПЕТЕНТНІСНОГО ЗАВДАННЯ\n` +
+               `- Тема заняття — ${theme}\n` +
+               `- Було (Пам'ять) — ${oldQ}\n` +
+               `- Рівень за Блумом — ${bloom}\n` +
+               `- [Контекст] — ${ctx}\n` +
+               `- [Проблема] — ${prob}\n` +
+               `- [Дія] — ${act}\n\n` +
+               `2. АРХІТЕКТУРА ТА ФАСИЛІТАЦІЯ УРОКУ\n` +
+               `- Педагогічна маска ШІ — ${role}\n` +
+               `- Модель взаємодії — ${model}\n` +
+               `- Ритуал «Екрани на стіл» та «Три питання слідчого» — ${process}\n` +
+               `- Фінальний аудит Human-in-the-Loop — Пройдено (Стоп Галюцинації / Вода / Чужий контекст)\n` +
+               `=========================================`;
+    }
+
+    function prepareSummary() {
+        let c1 = document.getElementById('check1').checked;
+        let c2 = document.getElementById('check2').checked;
+        let c3 = document.getElementById('check3').checked;
+        if(!c1 || !c2 || !c3) {
+            alert("Будь ласка, відмітьте всі три фільтри фінального аудиту вчителя (Human-in-the-Loop)!");
+            return;
+        }
+
+        let score = calculateQuizScore();
+        document.getElementById('scoreBadge').innerText = `Результат тесту за презентацією ЛК 13 — ${score} з 10 балів`;
+        let summaryText = getSummaryText().replace(/\n/g, '<br>');
+        document.getElementById('summaryCard').innerHTML = summaryText;
+        nextStep(5);
+    }
+
+    function sendViaFormSubmit() {
+        let name = document.getElementById('userName').value;
+        let email = document.getElementById('userEmail').value;
+        let score = calculateQuizScore();
+        let text = getSummaryText();
+
+        let statusDiv = document.getElementById('sendStatus');
+        statusDiv.innerText = "Відправлення копії звіту на ls.shevchenko@vspu.edu.ua...";
+
+        fetch("https://formsubmit.co/ajax/ls.shevchenko@vspu.edu.ua", {
+            method: "POST",
+            headers: { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                name: name,
+                email: email,
+                test_score: score + " / 10",
+                level: selectedLevel,
+                message: text,
+                _subject: `Тема 13 (Тест ${score}/10) - ${name}`
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            statusDiv.innerText = "Копію звіту надіслано на ls.shevchenko@vspu.edu.ua!";
+        })
+        .catch(error => {
+            statusDiv.innerText = "Збережіть звіт у PDF або зробіть скріншот для прикріплення в Google Клас.";
+        });
+    }
+
+    function copyToClipboard() {
+        let text = getSummaryText();
+        navigator.clipboard.writeText(text).then(() => {
+            alert("Текст звіту скопійовано в буфер обміну!");
+        });
+    }
+</script>
+
+</body>
+</html>
